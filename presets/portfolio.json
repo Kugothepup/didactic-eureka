@@ -1,0 +1,70 @@
+{
+ "description": "A designer's or consultant's portfolio, judged by someone hiring.",
+ "journey": {
+  "audience": "A hiring manager or design lead screening candidates for the role.",
+  "endsAt": "A way to get in touch (contact details or a contact form). Nothing is sent.",
+  "stages": [
+   {
+    "n": 1,
+    "slug": "arrive",
+    "name": "Arrive and orient",
+    "task": "You're hiring for this role and arrive from a link in a message. What do you do first?",
+    "checks": [
+     "The first screen says who this is and what they do, in plain words",
+     "The kind of work (domain, research, product) is clear without scrolling",
+     "One primary action (see the work) stands out"
+    ]
+   },
+   {
+    "n": 2,
+    "slug": "find-the-work",
+    "name": "Find the work",
+    "task": "You want to see their most relevant project. Where do you click?",
+    "checks": [
+     "A case study is one click from the first screen",
+     "Projects are labelled by the problem or outcome, not only a client name or image",
+     "The most relevant project for the role can be picked out without opening them all"
+    ]
+   },
+   {
+    "n": 3,
+    "slug": "judge-the-evidence",
+    "name": "Judge the evidence",
+    "task": "You're on a case study. Find what this person did personally, and what changed because of it.",
+    "checks": [
+     "The person's own role is stated",
+     "An outcome or evidence is stated, or why it can't be shared",
+     "A summary near the top gives the problem, role and outcome"
+    ]
+   },
+   {
+    "n": 4,
+    "slug": "get-in-touch",
+    "name": "Get in touch",
+    "task": "You'd like to invite them to interview. How do you get in touch?",
+    "checks": [
+     "A contact route is visible from the case study, not just the homepage",
+     "Contact needs no form, or the form asks only for essentials",
+     "Availability or what happens next is stated"
+    ]
+   },
+   {
+    "n": 5,
+    "slug": "reassurance",
+    "name": "Reassurance",
+    "task": "Before reaching out, you want to check they're credible. Where do you look?",
+    "checks": [
+     "Independent proof (a named testimonial, publication or client) sits near the work",
+     "Real identity is clear: full name, LinkedIn, location",
+     "The site looks current: dates, current role"
+    ]
+   }
+  ]
+ },
+ "exampleTasks": [
+  "Find their email, starting from a case study",
+  "Find a project about <the role's domain>",
+  "Find where they studied or trained",
+  "Find what they're working on now"
+ ]
+}

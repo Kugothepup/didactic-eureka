@@ -1,0 +1,8 @@
+{
+  "name": "research-studio",
+  "version": "0.2.0",
+  "description": "Evidence-led UX reviews for any project: capture your site and competitors along one journey (stills, videos, structure, accessibility), predict and draw first clicks, review in pluses and deltas, synthesise in Notion, and re-run in rounds to show what changed.",
+  "author": { "name": "Steeve Royce" },
+  "repository": "https://github.com/Kugothepup/turbo-barnacle",
+  "keywords": ["ux", "research", "competitor-review", "notion", "playwright", "accessibility"]
+}

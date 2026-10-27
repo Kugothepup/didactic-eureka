@@ -1,0 +1,69 @@
+{
+ "description": "A product or service that a visitor signs up to or starts using (SaaS, membership, app).",
+ "journey": {
+  "audience": "<who is doing the journey, and what they need>",
+  "endsAt": "The first next-step screen. Nothing is submitted.",
+  "stages": [
+   {
+    "n": 1,
+    "slug": "arrive",
+    "name": "Arrive and orient",
+    "task": "You land here with this need. What do you do first?",
+    "checks": [
+     "The first screen says in plain words what this is",
+     "Who it's for is clear",
+     "One primary action stands out"
+    ]
+   },
+   {
+    "n": 2,
+    "slug": "understand-the-offer",
+    "name": "Understand the offer",
+    "task": "You want to know how this works. Where do you look?",
+    "checks": [
+     "How it works is shown as steps",
+     "Cost or commitment is visible, or how it's decided",
+     "What is and isn't included is one click away"
+    ]
+   },
+   {
+    "n": 3,
+    "slug": "choose-your-route",
+    "name": "Choose your route",
+    "task": "You fit this group. Where do you go?",
+    "checks": [
+     "Visitors can pick a route by role or need",
+     "Route labels use the visitors' own words (check against Forum findings)",
+     "No more than 5 routes in one group (a house rule, not a law)"
+    ]
+   },
+   {
+    "n": 4,
+    "slug": "start",
+    "name": "Start",
+    "task": "You want to begin. Where do you click?",
+    "checks": [
+     "The first next-step screen is 3 clicks or fewer from arrival (a house rule)",
+     "The first screen asks only for what it needs",
+     "The next step and how long it takes are stated"
+    ]
+   },
+   {
+    "n": 5,
+    "slug": "reassurance",
+    "name": "Reassurance",
+    "task": "Before going further, you want to know you can trust this. Where do you look?",
+    "checks": [
+     "Independent proof sits near the decision, with its source named",
+     "Who stands behind it is stated",
+     "Help or contact is visible at decision points"
+    ]
+   }
+  ]
+ },
+ "exampleTasks": [
+  "Find the price for <a plan>",
+  "Find how to cancel",
+  "Find who it's for"
+ ]
+}

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "research-studio",
+  "description": "Steeve Royce's Research Studio plugin",
+  "owner": { "name": "Steeve Royce" },
+  "plugins": [
+    {
+      "name": "research-studio",
+      "description": "Evidence-led UX reviews: capture, record, first clicks, pluses and deltas, Notion synthesis, rounds.",
+      "source": "./",
+      "category": "productivity"
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+ "description": "An online shop, up to the first checkout screen.",
+ "journey": {
+  "audience": "<who is buying, and what they came for>",
+  "endsAt": "The first checkout screen. Nothing is added, submitted or bought; the read-only guard blocks requests that change anything, so a step that needs one stops there and is recorded as Stopped at submit.",
+  "stages": [
+   {
+    "n": 1,
+    "slug": "arrive",
+    "name": "Arrive and orient",
+    "task": "You're looking for this kind of product and arrive from a search. What do you do first?",
+    "checks": [
+     "The first screen says what the shop sells, in plain words",
+     "Search or categories are visible",
+     "One primary route (shop, search) stands out"
+    ]
+   },
+   {
+    "n": 2,
+    "slug": "find-the-product",
+    "name": "Find the product",
+    "task": "You want a specific product. How do you find it?",
+    "checks": [
+     "Category labels use shoppers' own words",
+     "Search is one click away",
+     "Filters match what shoppers compare on"
+    ]
+   },
+   {
+    "n": 3,
+    "slug": "decide",
+    "name": "Decide",
+    "task": "You're on the product page. Find the price, delivery and returns.",
+    "checks": [
+     "The full price is visible near the main action",
+     "Delivery cost and time are visible before the basket",
+     "Returns are explained or one click away"
+    ]
+   },
+   {
+    "n": 4,
+    "slug": "start-checkout",
+    "name": "Start checkout",
+    "task": "You want to buy it. Where do you click?",
+    "checks": [
+     "The main action is clear and labelled with the outcome",
+     "Guest checkout is offered, or why an account is needed",
+     "The first checkout screen asks only for essentials"
+    ]
+   },
+   {
+    "n": 5,
+    "slug": "reassurance",
+    "name": "Reassurance",
+    "task": "Before paying, you want to know you can trust this shop. Where do you look?",
+    "checks": [
+     "Reviews name their source",
+     "Who runs the shop and where is stated",
+     "Help or contact is visible during checkout"
+    ]
+   }
+  ]
+ },
+ "exampleTasks": [
+  "Find the delivery cost",
+  "Find the returns policy",
+  "Find a product's size guide"
+ ]
+}

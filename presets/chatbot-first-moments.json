@@ -1,0 +1,69 @@
+{
+ "description": "A chatbot or conversational AI agent met for the first time, on a company site or as a general assistant. Observe-only: nothing is typed or sent.",
+ "journey": {
+  "audience": "Someone with a question for a company, or a task for an assistant, who meets a chat agent for the first time. For a general assistant, 'the site' means the product's first screen.",
+  "endsAt": "The agent's opening state, before anything is typed. Nothing is typed, sent or submitted.",
+  "stages": [
+   {
+    "n": 1,
+    "slug": "find-it",
+    "name": "Find it",
+    "task": "You have a question and want help now. Where do you look?",
+    "checks": [
+     "It's visible on the first screen without scrolling",
+     "It's labelled as an assistant or AI, not just \"chat\"",
+     "It doesn't block the page and can be dismissed"
+    ]
+   },
+   {
+    "n": 2,
+    "slug": "open-and-be-introduced",
+    "name": "Open and be introduced",
+    "task": "You open it. What does it tell you?",
+    "checks": [
+     "It says in plain words that it's an AI or automated",
+     "It says what it can help with, or offers starting options",
+     "A short greeting that doesn't hide the input"
+    ]
+   },
+   {
+    "n": 3,
+    "slug": "limits-and-data",
+    "name": "Limits and data",
+    "task": "Before you type, do you know what not to share?",
+    "checks": [
+     "A privacy or data notice is reachable from the chat",
+     "A \"may be wrong\" or limits note is visible",
+     "It says whether chats are stored or used"
+    ]
+   },
+   {
+    "n": 4,
+    "slug": "find-a-person",
+    "name": "Find a person",
+    "task": "This won't be enough. How do you reach a person or another route?",
+    "checks": [
+     "A human or other route is visible in the opening state",
+     "It says what happens next and how soon",
+     "It says you won't have to repeat yourself"
+    ]
+   },
+   {
+    "n": 5,
+    "slug": "access-and-fit",
+    "name": "Access and fit",
+    "task": "You use a keyboard, a screen reader or a phone. Does it work?",
+    "checks": [
+     "It's reachable and usable by keyboard",
+     "Controls are named and text contrast passes axe",
+     "It fits on a phone without obstructing the page"
+    ]
+   }
+  ]
+ },
+ "exampleTasks": [
+  "Find how to reach a person",
+  "Find out whether the chat is stored",
+  "Find out what this agent can help with"
+ ]
+}

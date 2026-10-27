@@ -1,0 +1,69 @@
+{
+ "description": "A weather forecast or warning service met for the first time on the web, read for how it shows what the weather will do (impact), not only what it will be. Observe-only, logged out, desktop and phone.",
+ "journey": {
+  "audience": "Someone who wants to know what tomorrow's weather will mean for them (travel, home, health, plans), and meets a forecast or warning service without signing in.",
+  "endsAt": "The page that tells them what to expect and what to do for their place. Nothing is submitted and nobody signs in.",
+  "stages": [
+   {
+    "n": 1,
+    "slug": "find-your-place",
+    "name": "Find your place",
+    "task": "You want to know what the weather will do where you are tomorrow. Where do you start?",
+    "checks": [
+     "A place search or locate control is visible on the first screen",
+     "A place name or postcode gives a forecast without signing in",
+     "The way to warnings or alerts is visible on the first screen"
+    ]
+   },
+   {
+    "n": 2,
+    "slug": "see-what-to-expect",
+    "name": "See what to expect",
+    "task": "What will the weather do to you, not just what will it be?",
+    "checks": [
+     "The forecast or warning says what it may affect (travel, property, health), not only conditions",
+     "Conditions and impact appear together, not on separate pages",
+     "The impact wording is plain language, without codes or jargon"
+    ]
+   },
+   {
+    "n": 3,
+    "slug": "severity-and-likelihood",
+    "name": "Severity and likelihood",
+    "task": "How serious is it, and how likely?",
+    "checks": [
+     "Severity is shown by more than colour alone (words or icons as well)",
+     "Likelihood is stated or shown",
+     "The levels are explained on the page or one link away"
+    ]
+   },
+   {
+    "n": 4,
+    "slug": "what-to-do",
+    "name": "What to do",
+    "task": "What should you do, and where do you find more?",
+    "checks": [
+     "It says what to do, or links to advice",
+     "It shows when it starts and ends for your area",
+     "It says how it will be updated, or where to find updates"
+    ]
+   },
+   {
+    "n": 5,
+    "slug": "access-and-fit",
+    "name": "Access and fit",
+    "task": "You use a keyboard, a screen reader or a phone. Does it work?",
+    "checks": [
+     "It's reachable and usable by keyboard",
+     "Controls are named and text contrast passes axe",
+     "It fits on a phone without horizontal scrolling"
+    ]
+   }
+  ]
+ },
+ "exampleTasks": [
+  "Find the warning for your area",
+  "Find what the warning level means",
+  "Find when it starts and ends"
+ ]
+}

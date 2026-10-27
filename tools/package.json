@@ -1,0 +1,8 @@
+{
+  "name": "research-studio-tools",
+  "private": true,
+  "type": "module",
+  "description": "Read-only capture, recording, first-click and structure tools for Research Studio studies",
+  "bin": { "studio": "./studio.mjs" },
+  "dependencies": { "axe-core": "4.10.2", "playwright": "1.61.1" }
+}

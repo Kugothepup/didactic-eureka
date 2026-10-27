@@ -1,0 +1,69 @@
+{
+ "description": "A service business that visitors enquire with (agency, clinic, trades, consultancy).",
+ "journey": {
+  "audience": "<who needs the service, and what's prompting them now>",
+  "endsAt": "The enquiry route (contact details, a booking link or a form). Nothing is sent.",
+  "stages": [
+   {
+    "n": 1,
+    "slug": "arrive",
+    "name": "Arrive and orient",
+    "task": "You need this kind of help and arrive from a search. What do you do first?",
+    "checks": [
+     "The first screen says what the service is and who it's for",
+     "The area or eligibility is clear without scrolling",
+     "One primary action stands out"
+    ]
+   },
+   {
+    "n": 2,
+    "slug": "find-the-service",
+    "name": "Find the service",
+    "task": "You want the service that fits your situation. Where do you click?",
+    "checks": [
+     "Services are named in the visitor's words, not internal names",
+     "Price, or how it's priced, is visible",
+     "What's included and what isn't is stated"
+    ]
+   },
+   {
+    "n": 3,
+    "slug": "judge-fit",
+    "name": "Judge fit and evidence",
+    "task": "You want proof they've done this before. Where do you look?",
+    "checks": [
+     "Examples or case studies match the visitor's situation",
+     "Named reviews or clients sit near the service",
+     "Timescales are stated"
+    ]
+   },
+   {
+    "n": 4,
+    "slug": "enquire",
+    "name": "Enquire",
+    "task": "You'd like to talk to them. How do you get in touch?",
+    "checks": [
+     "A contact route is visible from each service page",
+     "The form, if any, asks only for essentials",
+     "What happens next and how soon is stated"
+    ]
+   },
+   {
+    "n": 5,
+    "slug": "reassurance",
+    "name": "Reassurance",
+    "task": "Before enquiring, you want to know they're trustworthy. Where do you look?",
+    "checks": [
+     "Reviews or ratings name their source",
+     "Accreditations or memberships are shown and checkable",
+     "Who runs the business is stated"
+    ]
+   }
+  ]
+ },
+ "exampleTasks": [
+  "Find the price for <a service>",
+  "Find whether they cover <an area>",
+  "Find how quickly they respond"
+ ]
+}
