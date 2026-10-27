@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.5.1 · 2026-10-27
+
+- Report: optional `banner` in `reviews.json` (e.g. to mark sample text); the link-structure note says
+  depth is a lower bound set by the crawl cap.
+
 ## 0.5.0 · 2026-10-27
 
 - **Themes across sites:** `studio themes` groups the pluses and deltas in `reviews.json` into themes

@@ -60,7 +60,7 @@ export function buildReport({ study, baseDir, round, summary, siteDir, reviews, 
   const graphs = sites.map((s) => [s, graphOf(s)]).filter(([, g]) => g);
   const li = (items, n = 6) => items.slice(0, n).map((u) => `<code>${esc(pathOf(u.url || u))}</code>`).join(", ") + (items.length > n ? ` and ${items.length - n} more` : "");
   const structure = graphs.length ? `<section id="structure"><h2>Link structure</h2>
-    <p class="note">Measured from the page crawl with NetworkX. “Menu links” are pages linked from at least 80% of crawled pages (navigation and footer): they make every page one click away, so depth and hubs are also shown without them. The crawl is capped, so these describe the pages reached, not the whole site.</p>
+    <p class="note">Measured from the page crawl with NetworkX. “Menu links” are pages linked from at least 80% of crawled pages (navigation and footer): they make every page one click away, so depth and hubs are also shown without them. The crawl is capped, and a breadth-first crawl seldom gets past two clicks from the start page, so read the depth columns as a lower bound: they mostly show the cap. Pages found, menu links, hubs and clusters are more reliable.</p>
     <div class="scroll"><table><thead><tr><th>Site</th><th>Pages found</th><th>Crawled</th><th>Menu links</th><th>Deepest (all links)</th><th>Deepest (no menu)</th><th>Goal: clicks via links</th><th>Pages only in the menu</th><th>Dead ends</th><th>Clusters</th></tr></thead><tbody>
     ${graphs.map(([s, g]) => `<tr><th scope="row">${esc(s.name)}</th><td>${g.pages}</td><td>${g.crawled}</td><td>${g.globalLinks.length}</td><td>${cell(g.maxDepth)}</td><td>${cell(g.localMaxDepth)}</td><td>${g.goal ? cell(g.goal.localDepth ?? g.goal.linkDepth) : "—"}</td><td>${g.menuOnly.length}</td><td>${g.deadEnds.length}</td><td>${g.communities.length}</td></tr>`).join("")}
     </tbody></table></div></section>` : "";
@@ -69,7 +69,7 @@ export function buildReport({ study, baseDir, round, summary, siteDir, reviews, 
       <dl><dt>Most linked-to</dt><dd>${li(g.hubsByPageRank, 4) || "—"}</dd>
       <dt>Clusters</dt><dd>${g.communities.length ? g.communities.slice(0, 4).map((c) => `${c.size} pages around <code>${esc(pathOf(c.pages[0]))}</code>`).join("; ") : "none beyond the menu"}</dd>
       <dt>Only via the menu</dt><dd>${g.menuOnly.length ? li(g.menuOnly, 5) : "none"}</dd>
-      <dt>Dead ends</dt><dd>${g.deadEnds.length ? li(g.deadEnds, 5) : "none"}</dd>${g.goal ? `<dt>Goal page</dt><dd><code>${esc(pathOf(g.goal.url))}</code>: ${g.goal.localDepth != null ? `${g.goal.localDepth} click(s) by page links` : g.goal.linkDepth != null ? `${g.goal.linkDepth} click(s), only through the menu` : "not reached by links in this crawl"}</dd>` : ""}</dl></div></div>`;
+      <dt>Dead ends</dt><dd>${g.deadEnds.length ? li(g.deadEnds, 5) : "none"}</dd>${g.goal ? `<dt>Goal page</dt><dd><code>${esc(pathOf(g.goal.url))}</code>: ${g.goal.localDepth === 0 ? "on the start page itself" : g.goal.localDepth != null ? `${g.goal.localDepth} click(s) by page links` : g.goal.linkDepth != null ? `${g.goal.linkDepth} click(s), only through the menu` : "not reached by links in this crawl"}</dd>` : ""}</dl></div></div>`;
 
   // Stage matrix: rows are stages, columns are sites (only when reviews carry stage scores).
   const scored = sites.filter((s) => rv(s.slug)?.stages);
@@ -148,15 +148,17 @@ th[scope=row]{min-width:150px}th,td{padding:8px 12px;text-align:left;border-bott
 details{border-top:1px solid var(--line);padding:6px 0}summary{cursor:pointer;font-weight:600}.checks{margin:.4em 0;padding-left:1.1em}.ev{color:var(--mute)}.res{font-size:.75rem;text-transform:uppercase;font-weight:700;color:var(--mute)}.res-yes{color:var(--plus)}.res-no{color:var(--bad)}.res-partly{color:var(--delta)}
 .stills{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}.stills figure{margin:0}.stills img{width:100%;border:1px solid var(--line);border-radius:8px;display:block}.stills figcaption{font-size:.82rem;color:var(--mute);margin-top:4px}
 svg.graph{width:100%;height:auto;background:var(--bg);border:1px solid var(--line);border-radius:10px}svg.graph line{stroke:var(--line);stroke-width:.7}svg.graph text{font:11px system-ui,sans-serif;fill:var(--fg);paint-order:stroke;stroke:var(--bg);stroke-width:3px}.graphwrap{display:grid;grid-template-columns:minmax(300px,1.4fr) 1fr;gap:18px}@media(max-width:760px){.graphwrap{grid-template-columns:1fr}}.gfacts dl{margin:0}.gfacts dt{font-weight:600;font-size:.85rem;color:var(--mute);margin-top:.6em}.gfacts dd{margin:.1em 0;overflow-wrap:anywhere}code{background:var(--chip);padding:0 4px;border-radius:4px;font-size:.85em}
+.banner{max-width:1068px;margin:12px auto;padding:10px 14px;border:2px dashed var(--delta);border-radius:10px;background:var(--chip);font-weight:600}
 .theme{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin:0 0 14px}.theme h3{font-size:1.05rem}.tf{list-style:none;margin:.4em 0 0;padding:0}.tf li{display:flex;gap:10px;margin:0 0 10px}.tf p{margin:.1em 0 0;color:var(--mute);font-size:.92rem}.tf .sign.plus{background:var(--plus);color:#fff}.tf .sign.delta{background:var(--delta);color:#fff}
 img.wide,video{width:100%;max-width:100%;border:1px solid var(--line);border-radius:10px;display:block;background:#000}
 footer{max-width:1100px;margin:0 auto;padding:24px 16px 60px;color:var(--mute);font-size:.85rem;border-top:1px solid var(--line)}
-@media print{nav.toc{display:none}.site{break-inside:avoid-page}video{display:none}}`;
+@media(max-width:1100px){.banner{margin:12px 16px}}@media print{nav.toc{display:none}.site{break-inside:avoid-page}video{display:none}}`;
 
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${esc(study.id)} · ${esc(study.title || "Research Studio report")}</title><style>${css}</style></head><body>
 <header class="top"><p class="eyebrow">Research Studio · ${esc(study.id)} · round ${esc(round.id)}${round.started ? ` · ${esc(round.started)}` : ""}</p><h1>${esc(study.title || study.id)}</h1>
 <p class="note">${esc(study.conditions?.viewport || "")} ${esc(study.conditions?.locale || "")}${round.note ? ` · ${esc(round.note)}` : ""}${reviews ? "" : " · Measured evidence only: no reviews written yet."}</p></header>
+${reviews?.banner ? `<p class="banner" role="note">${esc(reviews.banner)}</p>` : ""}
 <nav class="toc" aria-label="Sections"><ul>${nav.map(([id, l]) => `<li><a href="#${id}">${l}</a></li>`).join("")}</ul></nav>
 <main>${measured}${journey}${structure}${matrix}${themesHtml}${synthesis}<section id="sites"><h2>Sites</h2>${sites.map(siteCard).join("")}</section></main>
 <footer>Generated ${esc(new Date().toISOString().slice(0, 10))} by Research Studio. Counts are measured by the tools; stage scores, reviews and first clicks are judgement and a stand-in for user testing.</footer>

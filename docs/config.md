@@ -128,6 +128,7 @@ judgement without Notion, write `reviews.json` beside `study.json`:
 
 ```jsonc
 {
+  "banner": "Optional line shown at the top of the report, e.g. to mark sample text",
   "synthesis": {
     "status": "Draft: a proxy for user testing",       // optional
     "summary": "One or two sentences.",
