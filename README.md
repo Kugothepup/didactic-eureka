@@ -4,7 +4,7 @@ A Claude Code plugin for evidence-led UX reviews. It captures your site and your
 same journey, records what a visitor sees, predicts and draws first clicks, writes reviews in pluses
 and deltas, synthesises the evidence in Notion, and re-runs in rounds so you can show what changed.
 
-It was built on study ST-3 (the portfolio) and works for any project: pick a journey preset, list
+It works for any project: pick a journey preset, list
 the sites, and run the commands.
 
 ## What's in it
@@ -16,13 +16,13 @@ the sites, and run the commands.
 | Voice | `skills/review-writeup/` | pluses before deltas, calibrated not absolute |
 | Tools | `tools/` | the `studio` CLI: capture, record, structure, first clicks, annotations, summary, compare |
 | Presets | `presets/` | journeys for `portfolio`, `sign-up`, `service-enquiry`, `checkout` |
-| Templates | `templates/` | Notion IDs and gotchas, and ST-3's `study.json` as a worked example |
+| Templates | `templates/` | Notion IDs to fill in, and gotchas |
 | Docs | `docs/` | the config format, the method in brief, and the retro log |
 
 ## Install
 
 ```bash
-git clone git@github.com:Kugothepup/turbo-barnacle.git ~/Documents/research-studio
+git clone git@github.com:Kugothepup/didactic-eureka.git ~/Documents/research-studio
 bash ~/Documents/research-studio/setup.sh                 # Node packages and Playwright's Chromium
 claude plugin marketplace add ~/Documents/research-studio  # this repo is its own marketplace
 claude plugin install research-studio@research-studio
@@ -65,7 +65,7 @@ steps repeatable.
 
 ```bash
 node tools/studio.mjs help
-node tools/studio.mjs status ~/Documents/studies/ST-3/study.json
+node tools/studio.mjs status ~/Documents/studies/ST-1/study.json
 ```
 
 See `docs/config.md` for `study.json`.

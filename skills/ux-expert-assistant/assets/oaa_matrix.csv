@@ -1,0 +1,4 @@
+Object (Noun),Attribute (Adjective/State),Action (Verb),Cardinality,Priority,Visualization Hint
+"Invoice","Status: Draft/Paid","Create",1:Many,P0,"Modal"
+"Invoice","Date Due","Send",1:1,P0,"Primary Button"
+"Customer","Credit Score","View History",1:1,P1,"Widget"

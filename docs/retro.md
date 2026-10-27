@@ -3,7 +3,7 @@
 Pluses and deltas on the method itself, after each study or round (`/research-studio:retro`).
 Newest first. Each Δ either became a change (with its version) or stays open.
 
-## 2026-10-15 · ST-3 (portfolio), the study the plugin was built from
+## 2026-10-15 · the first study, which the plugin was built from
 
 **+ Keep**
 - **One journey for every site, with three yes/no checks per stage.** Scores are comparable and each

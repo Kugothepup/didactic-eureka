@@ -7,7 +7,7 @@ argument-hint: "[ST-n] [notes]"
 # Retro on the method
 
 Arguments: $ARGUMENTS. The plugin's source is the git repo at `~/Documents/research-studio`
-(GitHub: Kugothepup/turbo-barnacle). Always edit there, never in the installed plugin copy.
+(GitHub: Kugothepup/didactic-eureka). Always edit there, never in the installed plugin copy.
 
 1. Look back over the study (and this conversation): where the tools failed or needed workarounds,
    where a check or preset didn't fit, what the user corrected, what took longest.

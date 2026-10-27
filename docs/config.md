@@ -2,11 +2,11 @@
 
 One file per study, in the study's folder (by default `~/Documents/studies/ST-n/study.json`). Every
 `studio` command reads it. Start one with `studio init <dir> --id ST-n --preset <name>`; see
-`templates/examples/ST-3.study.json` for a complete example.
+the preset files in `presets/` for starting points.
 
 ```jsonc
 {
-  "id": "ST-3",
+  "id": "ST-1",
   "title": "What do hiring managers need to see to shortlist an AI UX designer?",
   "preset": "portfolio",
 
@@ -17,7 +17,7 @@ One file per study, in the study's folder (by default `~/Documents/studies/ST-n/
   "conditions": { "viewport": "1440x900", "locale": "en-GB", "timezone": "Europe/London" },
 
   // Rounds: each is one dated capture of every site. Output goes to rounds/<id>/<site>/ unless
-  // the round sets "dir" (ST-3's first round uses "." because it predates rounds) or "siteDirs".
+  // the round sets "dir" (a study's first round uses "." because it predates rounds) or "siteDirs".
   "rounds": [ { "id": "r1", "dir": "rounds/r1", "started": "2026-10-13", "note": "Baseline" } ],
   "currentRound": "r1",
 
@@ -31,10 +31,10 @@ One file per study, in the study's folder (by default `~/Documents/studies/ST-n/
 
   "sites": [
     {
-      "slug": "steeveroyce-com",            // folder name
-      "name": "steeveroyce.com (own site)", // as in the Competitors table
+      "slug": "my-site",            // folder name
+      "name": "example.com (own site)", // as in the Competitors table
       "kind": "own",                        // own | competitor | inspiration
-      "url": "https://steeveroyce.com/",
+      "url": "https://example.com/",
       "cp": 1,                              // the row's CP number
       "notion": "<row page id>",
       "stepsComparable": true,              // false when the route had to use goto (new-tab links)
@@ -44,7 +44,7 @@ One file per study, in the study's folder (by default `~/Documents/studies/ST-n/
       // goal (the contact step), read (scroll one screen in the video),
       // scrollTo (a CSS selector, for a same-page step: the video scrolls to it)
       "route": [
-        { "stage": 1, "goto": "https://steeveroyce.com/" },
+        { "stage": 1, "goto": "https://example.com/" },
         { "stage": 2, "click": "See the work" },
         { "stage": 3, "click": "View case study", "read": true },
         { "stage": 4, "click": "Contact", "exact": true, "goal": true },
@@ -65,15 +65,15 @@ One file per study, in the study's folder (by default `~/Documents/studies/ST-n/
 
   // "Find X" tasks, recorded with `studio record --tasks`
   "tasks": [
-    { "slug": "t1-find-email", "site": "steeveroyce-com",
+    { "slug": "t1-find-email", "site": "my-site",
       "task": "Find his email. You're reading one of his case studies.",
       "rightAnswer": "The contact section",
-      "steps": [ { "slug": "start", "goto": "https://steeveroyce.com/projects/…/" },
+      "steps": [ { "slug": "start", "goto": "https://example.com/projects/…/" },
                  { "slug": "contact", "click": "Contact", "exact": true, "goal": true } ] }
   ],
 
   // shots.json files for `studio annotate`, relative to the study folder
-  "annotations": [ "steeveroyce-com/annotated/shots.json" ]
+  "annotations": [ "my-site/annotated/shots.json" ]
 }
 ```
 

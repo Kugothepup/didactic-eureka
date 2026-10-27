@@ -13,7 +13,7 @@
 
 ## 0.1.0 · 2026-10-15
 
-First version, extracted from study ST-3.
+First version, extracted from a first portfolio study.
 
 - **Plugin:** the `study-synthesis` method and `review-writeup` voice skills, and nine commands:
   `new`, `capture`, `review`, `tasks`, `synthesise`, `hub`, `round`, `promote`, `retro`.

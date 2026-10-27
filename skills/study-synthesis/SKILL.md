@@ -1,6 +1,6 @@
 ---
 name: study-synthesis
-description: "The Research Studio method: works a study in Notion (a page in Studies made from the Study template): reviews competitors against the study's journey checks, predicts first clicks as triage, writes the Synthesis section as a Draft, and promotes accepted findings to the shared Insights, Hypotheses and Opportunities databases on request. Use when the user says 'synthesise ST-3', 'synthesise the study', 'review the competitors for this study', 'predict first clicks', 'score the stages', 'promote the accepted findings', or refers to a study page with Forum findings, Competitors, and First click and journeys tables. Not for crp community analysis (use community-research in ~/Documents/dis) or for writing up a finished case study (use case-study-writing)."
+description: "The Research Studio method: works a study in Notion (a page in Studies made from the Study template): reviews competitors against the study's journey checks, predicts first clicks as triage, writes the Synthesis section as a Draft, and promotes accepted findings to the shared Insights, Hypotheses and Opportunities databases on request. Use when the user says 'synthesise ST-1', 'synthesise the study', 'review the competitors for this study', 'predict first clicks', 'score the stages', 'promote the accepted findings', or refers to a study page with Forum findings, Competitors, and First click and journeys tables.  Not for writing up a finished case study (use case-study-writing)."
 ---
 
 # Study synthesis: the Research Studio method
