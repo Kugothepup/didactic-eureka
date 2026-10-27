@@ -20,6 +20,9 @@ Load `research-studio:study-synthesis` (the method) first. Ask only for what's m
 4. **Sites:** the user's own site, competitors (3 to 5 is a good number), and any inspiration sites.
 5. **Beliefs going in,** or confirm it's a discovery study (no beliefs).
 
+**No Notion?** Use local mode (see the method's **Local mode**): skip the Notion section below, run
+`studio init`, and add the sites to `study.json`.
+
 ## Notion (IDs in `${CLAUDE_PLUGIN_ROOT}/templates/notion.md`)
 - **Project:** if new, duplicate the Project hub template into Projects and fill Name, Client, Goal.
 - **Study:** duplicate the Study template, rename it to the question, link the Project, set Goal and RQs

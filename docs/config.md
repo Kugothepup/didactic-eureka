@@ -92,6 +92,40 @@ the preset files in `presets/` for starting points.
 | `firstclick/` | `firstclick` | per-stage screens and the composed image |
 | `<round>/summary.json` | `summary` | the counts for the Notion rows |
 | `compare-<a>-<b>.md` | `compare` | measured changes between rounds |
+| `report-<round>.html` | `report` | the whole round as one HTML page (no Notion needed) |
 
 Uploaded media can be deleted locally once it's attached in Notion; keep the JSON so everything can
 be rebuilt.
+
+## reviews.json and the HTML report
+
+`studio report <study.json> [--round r] [--embed] [--out file.html] [--reviews file.json]` builds one
+HTML page from the capture output. With no `reviews.json` it shows measured evidence only. To add
+judgement without Notion, write `reviews.json` beside `study.json`:
+
+```jsonc
+{
+  "synthesis": {
+    "status": "Draft: a proxy for user testing",       // optional
+    "summary": "One or two sentences.",
+    "pluses": [ { "title": "What to keep", "why": "Because…" } ],
+    "deltas": [ { "title": "What to try", "why": "Because…" } ]
+  },
+  "sites": {
+    "my-site": {                                        // the site's slug
+      "take": "One-line take.",
+      "stages": {
+        "1": { "score": "Partly",                       // Yes | Partly | No | Absent | Blocked
+               "checks": [ { "check": "…", "result": "yes", "evidence": "…" } ],  // yes | partly | no
+               "note": "optional" }
+      },
+      "pluses": [ { "title": "…", "why": "…" } ],
+      "deltas": [ { "title": "…", "why": "…" } ]
+    }
+  }
+}
+```
+
+Images are linked by default, so keep the HTML where it can reach the study folder (the default is
+the study folder itself). `--embed` inlines the images for a single file you can email; videos stay
+linked.

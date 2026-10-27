@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.3.0 · 2026-10-27
+
+- **HTML report:** `studio report` builds one page per round from the capture output: measured counts,
+  the journey, each site's screens, video and predicted first clicks, a stage-by-stage matrix, and the
+  reviews and synthesis. `--embed` inlines the images into a single file.
+- **Local mode:** Notion is now optional. Without it the commands work from the study folder, write
+  judgement to `reviews.json` and finish with the report. Shape documented in `docs/config.md`.
+- **Bundled knowledge skills:** `cognitive-psychology-kb` and `ux-business-impact`, so the method has
+  everything it loads.
+
 ## 0.2.0 · 2026-10-25
 
 - **New step:** `question`, an optional way to develop a hunch, topic or frustration into research

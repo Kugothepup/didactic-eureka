@@ -14,15 +14,15 @@ the sites, and run the commands.
 | Commands | `skills/<command>/` | `/research-studio:new`, `question` (optional), `capture`, `review`, `tasks`, `synthesise`, `hub`, `round`, `promote`, `retro` |
 | Method | `skills/study-synthesis/` | the rules and steps every command follows |
 | Voice | `skills/review-writeup/` | pluses before deltas, calibrated not absolute |
-| Tools | `tools/` | the `studio` CLI: capture, record, structure, first clicks, annotations, summary, compare |
-| Presets | `presets/` | journeys for `portfolio`, `sign-up`, `service-enquiry`, `checkout` |
+| Tools | `tools/` | the `studio` CLI: capture, record, structure, first clicks, annotations, summary, compare, **report** (HTML) |
+| Presets | `presets/` | journeys for `portfolio`, `sign-up`, `service-enquiry`, `checkout`, `chatbot-first-moments`, `impact-forecast` |
 | Templates | `templates/` | Notion IDs to fill in, and gotchas |
 | Docs | `docs/` | the config format, the method in brief, and the retro log |
 
 ## Install
 
 ```bash
-git clone git@github.com:Kugothepup/didactic-eureka.git ~/Documents/research-studio
+git clone https://github.com/Kugothepup/didactic-eureka.git ~/Documents/research-studio
 bash ~/Documents/research-studio/setup.sh                 # Node packages and Playwright's Chromium
 claude plugin marketplace add ~/Documents/research-studio  # this repo is its own marketplace
 claude plugin install research-studio@research-studio
@@ -32,9 +32,13 @@ To work on the plugin itself, start Claude Code with the repo loaded directly, s
 without reinstalling: `claude --plugin-dir ~/Documents/research-studio`. After changing the repo,
 `claude plugin marketplace update research-studio` refreshes the installed copy.
 
-The commands also need the Notion connector, and the knowledge skills the method loads
-(cognitive-psychology-kb, cognitive-design-review, ux-expert-assistant, ogilvy-writing-coach,
-ux-business-impact).
+The knowledge skills the method loads (cognitive-psychology-kb, cognitive-design-review,
+ux-expert-assistant, ogilvy-writing-coach, ux-business-impact) are bundled in `skills/`.
+
+**Notion is optional.** With the Notion connector the studio keeps a shared record (study pages, review
+pages, a project hub). Without it, run in *local mode*: the commands work from the study folder and
+end with a single HTML report (`studio report`). Local mode is the quickest way to try it or demo it.
+Setting up Notion means building your own Research Studio hub and filling in `templates/notion.md`.
 
 ## A project, start to finish
 
@@ -52,6 +56,19 @@ ux-business-impact).
 
 You can also talk to Claude normally ("review these three sites for ST-4"); the commands make the
 steps repeatable.
+
+## Local mode: a report with no Notion
+
+```text
+/research-studio:new "What do buyers need to see before booking a demo?" https://mysite.com https://rival-a.com   # say "local, no Notion"
+/research-studio:capture ST-1
+/research-studio:review ST-1         # writes reviews.json instead of Notion pages
+/research-studio:synthesise ST-1
+node tools/studio.mjs report ~/Documents/studies/ST-1/study.json --embed   # → report-r1.html
+```
+
+The report has the measured counts, the journey, every site's screens, video and predicted first
+clicks, a stage-by-stage matrix, and the reviews and synthesis in pluses and deltas.
 
 ## Rules the tools keep
 

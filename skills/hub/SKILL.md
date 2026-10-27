@@ -6,6 +6,9 @@ argument-hint: "<ST-n or project name>"
 
 # Project hub
 
+**No Notion?** The local equivalent is the HTML report: `studio report <study.json> [--embed]`
+(see the method's **Local mode**). Use it instead of this page.
+
 Arguments: $ARGUMENTS. The hub is the study's Project page (`notion.project` in `study.json`). Load
 `research-studio:review-writeup`. Sections, in order:
 

@@ -15,6 +15,7 @@
 //   studio firstclick <study.json> [--round r] [--site s]
 //   studio annotate  <study.json> <shots.json> [--round r] [--out dir]
 //   studio summary   <study.json> [--round r]
+//   studio report    <study.json> [--round r] [--embed] [--out file.html] [--reviews file.json]
 // Any capture command takes --viewport 390x844 for a phone-width pass.
 //   studio compare   <study.json> <roundA> <roundB>
 import fs from "node:fs";
@@ -173,6 +174,19 @@ switch (cmd) {
     writeJSON(path.join(roundDir(round), "summary.json"), out);
     console.log(table(out.sites, ["slug", "kind", "capture", "reachedGoal", "stepsToGoal", "deadEnds", "fieldsAsked", "requiredFields", "axeSeriousCritical", "pagesCrawled"]));
     console.log(`\nwrote ${path.relative(studyDir, path.join(roundDir(round), "summary.json"))}`);
+    break;
+  }
+  case "report": {
+    // One HTML file for the round: no Notion needed. Judgement (reviews, stage scores) comes from
+    // reviews.json beside study.json when it exists; otherwise the report is measured evidence only.
+    const summary = summarise(round);
+    writeJSON(path.join(roundDir(round), "summary.json"), summary);
+    const rf = path.resolve(typeof flags.reviews === "string" ? flags.reviews : path.join(studyDir, "reviews.json"));
+    const out = path.resolve(typeof flags.out === "string" ? flags.out : path.join(studyDir, `report-${round.id}.html`));
+    const { buildReport } = await import("./report.mjs");
+    const html = buildReport({ study, baseDir: path.dirname(out), round, summary, siteDir: (s) => siteDir(s), reviews: exists(rf) ? readJSON(rf) : null, embed: !!flags.embed });
+    fs.writeFileSync(out, html);
+    console.log(`wrote ${path.relative(process.cwd(), out)} (${(html.length / 1024).toFixed(0)} KB${flags.embed ? ", images embedded" : ", images linked: keep it beside the study folder"})${exists(rf) ? "" : "\nNo reviews.json found: measured evidence only."}`);
     break;
   }
   case "compare": {

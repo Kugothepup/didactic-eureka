@@ -16,6 +16,26 @@ A study has two halves:
   `study.json` under `notion`, and the Research Studio's shared IDs are in
   `${CLAUDE_PLUGIN_ROOT}/templates/notion.md`.
 
+## Local mode (no Notion)
+
+Notion is optional. If the Notion connector isn't available, or the user asks for a local or demo
+run, work entirely from the study folder and end with an HTML report:
+
+1. **Set up:** `studio init <dir> --id ST-n --preset <name> --title "…"`, then fill in `sites` and
+   their `route`s in `study.json`. Skip every Notion step and leave the `notion` ids empty.
+2. **Capture:** the same as usual (`/research-studio:capture`).
+3. **Review and synthesise:** apply the same method and the same pluses-and-deltas voice, but write
+   the judgement into `reviews.json` beside `study.json` instead of Notion rows and pages (shape in
+   `${CLAUDE_PLUGIN_ROOT}/docs/config.md`): per-site `take`, `stages` (score + three checks with
+   evidence), `pluses`, `deltas`, and a `synthesis` marked Draft. Counts still come from
+   `studio summary`, never from reading screenshots.
+4. **Report:** `studio report <study.json>` writes `report-<round>.html`: the measured counts, the
+   journey, every site's stills, video and first clicks, the stage-by-stage matrix, and the
+   reviews and synthesis. Add `--embed` for a single file with the images inlined (videos stay
+   linked). Open it for the user and say what it holds.
+
+State plainly that no Notion records were written, and that the report is a stand-in for user testing.
+
 A study is one Notion page in the Research Studio's **Studies** database, made by duplicating
 "📋 Study template · duplicate me". Everything for the study lives on that page:
 

@@ -11,6 +11,9 @@ first, plus the knowledge skills the method names (cognitive-psychology-kb, cogn
 ux-expert-assistant, ogilvy-writing-coach, ux-business-impact). `studio` is
 `node ${CLAUDE_PLUGIN_ROOT}/tools/studio.mjs`.
 
+**Local mode (no Notion):** write the stage checks, reviews and first-click predictions into
+`reviews.json` and `study.json` instead of Notion, then run `studio report <study>`.
+
 For each site with capture evidence (never from memory):
 1. **Stage checks:** three yes/no checks per stage with one line of evidence each; Absent and Blocked
    are not zeros. Set the Stage selects.
