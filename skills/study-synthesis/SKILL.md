@@ -29,7 +29,11 @@ run, work entirely from the study folder and end with an HTML report:
    `${CLAUDE_PLUGIN_ROOT}/docs/config.md`): per-site `take`, `stages` (score + three checks with
    evidence), `pluses`, `deltas`, and a `synthesis` marked Draft. Counts still come from
    `studio summary`, never from reading screenshots.
-4. **Report:** `studio report <study.json>` writes `report-<round>.html`: the measured counts, the
+4. **Themes (when two or more sites have reviews):** `studio themes <study.json>` groups the pluses
+   and deltas into themes. Read each one, say where the grouping is wrong, and use the "worth
+   borrowing" themes (a plus on one site, a delta on another) to shape the synthesis. It matches
+   wording, not meaning, so never present a theme as a finding without reading its sources.
+5. **Report:** `studio report <study.json>` writes `report-<round>.html`: the measured counts, the
    journey, every site's stills, video and first clicks, the stage-by-stage matrix, and the
    reviews and synthesis. Add `--embed` for a single file with the images inlined (videos stay
    linked). Open it for the user and say what it holds.

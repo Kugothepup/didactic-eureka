@@ -9,7 +9,7 @@ const exists = (f) => fs.existsSync(f);
 const readJSON = (f) => JSON.parse(fs.readFileSync(f, "utf8"));
 const MIME = { ".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".webp": "image/webp" };
 
-export function buildReport({ study, baseDir, round, summary, siteDir, reviews, embed }) {
+export function buildReport({ study, baseDir, round, summary, siteDir, reviews, themes, embed }) {
   const rel = (f) => path.relative(baseDir, f).split(path.sep).map(encodeURIComponent).join("/");
   const img = (f, alt, cls = "") => {
     const src = embed ? `data:${MIME[path.extname(f)] || "image/png"};base64,${fs.readFileSync(f).toString("base64")}` : rel(f);
@@ -23,6 +23,14 @@ export function buildReport({ study, baseDir, round, summary, siteDir, reviews, 
   const pdBlock = (r) => (r && (r.pluses?.length || r.deltas?.length) ? `<div class="pd"><div><h4>Pluses</h4>${pd(r.pluses, "+")}</div><div><h4>Deltas</h4>${pd(r.deltas, "Δ")}</div></div>` : "");
 
   const sites = study.sites;
+  const nameOf = (slug) => sites.find((x) => x.slug === slug)?.name || slug;
+  const themesHtml = themes?.themes?.length ? `<section id="themes"><h2>Themes across sites</h2>
+    <p class="note">The pluses and deltas, grouped where their wording overlaps (NetworkX). It is a first grouping by wording, not meaning: read each theme and correct it. “Worth borrowing” marks a theme where one site does something well and another could do it better.</p>
+    ${themes.themes.map((t) => { const rep = t.findings.find((f) => f.id === t.representative) || t.findings[0];
+      return `<article class="theme"><header><h3>${esc(rep.title)}</h3><p class="meta">${t.siteCount} sites · ${t.size} findings${t.transferable ? ` · <span class="chip chip-yes">Worth borrowing</span>` : ""}</p></header>
+      ${t.transferable ? `<p class="note">Plus on ${esc(t.plusSites.map(nameOf).join(", "))}; delta on ${esc(t.deltaSites.map(nameOf).join(", "))}.</p>` : ""}
+      <ul class="tf">${t.findings.map((f) => `<li><span class="sign ${f.kind}" aria-label="${f.kind === "plus" ? "plus" : "delta"}">${f.kind === "plus" ? "+" : "Δ"}</span><div><strong>${esc(nameOf(f.site))}</strong>: ${esc(f.title)}${f.why ? `<p>${esc(f.why)}</p>` : ""}</div></li>`).join("")}</ul></article>`; }).join("")}
+    ${themes.oneOffs?.length ? `<details><summary>${themes.oneOffs.length} findings that didn't group</summary><ul class="tf">${themes.oneOffs.map((f) => `<li><span class="sign ${f.kind}">${f.kind === "plus" ? "+" : "Δ"}</span><div><strong>${esc(nameOf(f.site))}</strong>: ${esc(f.title)}${f.why ? `<p>${esc(f.why)}</p>` : ""}</div></li>`).join("")}</ul></details>` : ""}</section>` : "";
   const sum = (slug) => summary.sites.find((s) => s.slug === slug) || {};
   const rv = (slug) => reviews?.sites?.[slug];
   const stages = study.journey.stages;
@@ -117,7 +125,7 @@ export function buildReport({ study, baseDir, round, summary, siteDir, reviews, 
     </article>`;
   };
 
-  const nav = [["measured", "Measured"], ["journey", "Journey"], ...(graphs.length ? [["structure", "Structure"]] : []), ...(scored.length ? [["stages", "Stages"]] : []), ...(reviews?.synthesis ? [["synthesis", "Synthesis"]] : []), ["sites", "Sites"]];
+  const nav = [["measured", "Measured"], ["journey", "Journey"], ...(graphs.length ? [["structure", "Structure"]] : []), ...(scored.length ? [["stages", "Stages"]] : []), ...(themesHtml ? [["themes", "Themes"]] : []), ...(reviews?.synthesis ? [["synthesis", "Synthesis"]] : []), ["sites", "Sites"]];
   const css = `
 :root{--bg:#faf8f3;--fg:#1d1d1f;--mute:#5f5b52;--line:#ddd7c9;--card:#fff;--accent:#1f4fd1;--plus:#1b7a4b;--delta:#a05a00;--bad:#b3261e;--chip:#eee9dc}
 @media (prefers-color-scheme:dark){:root{--bg:#15161a;--fg:#ececef;--mute:#a4a2ab;--line:#2c2e35;--card:#1d1f25;--accent:#8fb0ff;--plus:#5fcf97;--delta:#ffb454;--bad:#ff8a80;--chip:#2a2c34}}
@@ -140,6 +148,7 @@ th[scope=row]{min-width:150px}th,td{padding:8px 12px;text-align:left;border-bott
 details{border-top:1px solid var(--line);padding:6px 0}summary{cursor:pointer;font-weight:600}.checks{margin:.4em 0;padding-left:1.1em}.ev{color:var(--mute)}.res{font-size:.75rem;text-transform:uppercase;font-weight:700;color:var(--mute)}.res-yes{color:var(--plus)}.res-no{color:var(--bad)}.res-partly{color:var(--delta)}
 .stills{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}.stills figure{margin:0}.stills img{width:100%;border:1px solid var(--line);border-radius:8px;display:block}.stills figcaption{font-size:.82rem;color:var(--mute);margin-top:4px}
 svg.graph{width:100%;height:auto;background:var(--bg);border:1px solid var(--line);border-radius:10px}svg.graph line{stroke:var(--line);stroke-width:.7}svg.graph text{font:11px system-ui,sans-serif;fill:var(--fg);paint-order:stroke;stroke:var(--bg);stroke-width:3px}.graphwrap{display:grid;grid-template-columns:minmax(300px,1.4fr) 1fr;gap:18px}@media(max-width:760px){.graphwrap{grid-template-columns:1fr}}.gfacts dl{margin:0}.gfacts dt{font-weight:600;font-size:.85rem;color:var(--mute);margin-top:.6em}.gfacts dd{margin:.1em 0;overflow-wrap:anywhere}code{background:var(--chip);padding:0 4px;border-radius:4px;font-size:.85em}
+.theme{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin:0 0 14px}.theme h3{font-size:1.05rem}.tf{list-style:none;margin:.4em 0 0;padding:0}.tf li{display:flex;gap:10px;margin:0 0 10px}.tf p{margin:.1em 0 0;color:var(--mute);font-size:.92rem}.tf .sign.plus{background:var(--plus);color:#fff}.tf .sign.delta{background:var(--delta);color:#fff}
 img.wide,video{width:100%;max-width:100%;border:1px solid var(--line);border-radius:10px;display:block;background:#000}
 footer{max-width:1100px;margin:0 auto;padding:24px 16px 60px;color:var(--mute);font-size:.85rem;border-top:1px solid var(--line)}
 @media print{nav.toc{display:none}.site{break-inside:avoid-page}video{display:none}}`;
@@ -149,7 +158,7 @@ footer{max-width:1100px;margin:0 auto;padding:24px 16px 60px;color:var(--mute);f
 <header class="top"><p class="eyebrow">Research Studio · ${esc(study.id)} · round ${esc(round.id)}${round.started ? ` · ${esc(round.started)}` : ""}</p><h1>${esc(study.title || study.id)}</h1>
 <p class="note">${esc(study.conditions?.viewport || "")} ${esc(study.conditions?.locale || "")}${round.note ? ` · ${esc(round.note)}` : ""}${reviews ? "" : " · Measured evidence only: no reviews written yet."}</p></header>
 <nav class="toc" aria-label="Sections"><ul>${nav.map(([id, l]) => `<li><a href="#${id}">${l}</a></li>`).join("")}</ul></nav>
-<main>${measured}${journey}${structure}${matrix}${synthesis}<section id="sites"><h2>Sites</h2>${sites.map(siteCard).join("")}</section></main>
+<main>${measured}${journey}${structure}${matrix}${themesHtml}${synthesis}<section id="sites"><h2>Sites</h2>${sites.map(siteCard).join("")}</section></main>
 <footer>Generated ${esc(new Date().toISOString().slice(0, 10))} by Research Studio. Counts are measured by the tools; stage scores, reviews and first clicks are judgement and a stand-in for user testing.</footer>
 </body></html>`;
 }

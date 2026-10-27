@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.5.0 · 2026-10-27
+
+- **Themes across sites:** `studio themes` groups the pluses and deltas in `reviews.json` into themes
+  with NetworkX (word-overlap similarity, nothing to download) and marks the ones worth borrowing: a
+  plus on one site and a delta on another about the same thing. Shown in the report. A first grouping
+  by wording, to read and correct.
+
 ## 0.4.0 · 2026-10-27
 
 - **Link graph:** `studio graph` analyses each site's structure crawl with NetworkX: depth from the

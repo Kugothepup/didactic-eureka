@@ -15,6 +15,7 @@
 //   studio firstclick <study.json> [--round r] [--site s]
 //   studio annotate  <study.json> <shots.json> [--round r] [--out dir]
 //   studio graph     <study.json> [--round r] [--site s]   link graph of each site's structure crawl
+//   studio themes    <study.json> [--min-sim 0.2]          group the pluses and deltas in reviews.json into themes
 //   studio summary   <study.json> [--round r]
 //   studio report    <study.json> [--round r] [--embed] [--out file.html] [--reviews file.json]
 // Any capture command takes --viewport 390x844 for a phone-width pass.
@@ -178,6 +179,14 @@ switch (cmd) {
     if (run("graph.py", dirs) !== 0) die("graph.py failed. Is NetworkX installed? Run:\n  bash " + path.join(ROOT, "setup.sh"), 3);
     break;
   }
+  case "themes": {
+    // Reads reviews.json (local mode), writes themes.json beside it. NetworkX venv from setup.sh.
+    const rf = path.resolve(typeof flags.reviews === "string" ? flags.reviews : path.join(studyDir, "reviews.json"));
+    if (!exists(rf)) die(`No reviews.json at ${rf}. Write the reviews first (see docs/config.md).`);
+    const code = run("themes.py", [rf, path.join(studyDir, "themes.json"), ...(flags["min-sim"] ? ["--min-sim", String(flags["min-sim"])] : [])]);
+    if (code !== 0) die("themes.py failed. Is NetworkX installed? Run:\n  bash " + path.join(ROOT, "setup.sh"), 3);
+    break;
+  }
   case "summary": {
     const out = summarise(round);
     writeJSON(path.join(roundDir(round), "summary.json"), out);
@@ -193,7 +202,7 @@ switch (cmd) {
     const rf = path.resolve(typeof flags.reviews === "string" ? flags.reviews : path.join(studyDir, "reviews.json"));
     const out = path.resolve(typeof flags.out === "string" ? flags.out : path.join(studyDir, `report-${round.id}.html`));
     const { buildReport } = await import("./report.mjs");
-    const html = buildReport({ study, baseDir: path.dirname(out), round, summary, siteDir: (s) => siteDir(s), reviews: exists(rf) ? readJSON(rf) : null, embed: !!flags.embed });
+    const html = buildReport({ study, baseDir: path.dirname(out), round, summary, siteDir: (s) => siteDir(s), reviews: exists(rf) ? readJSON(rf) : null, themes: exists(path.join(studyDir, "themes.json")) ? readJSON(path.join(studyDir, "themes.json")) : null, embed: !!flags.embed });
     fs.writeFileSync(out, html);
     console.log(`wrote ${path.relative(process.cwd(), out)} (${(html.length / 1024).toFixed(0)} KB${flags.embed ? ", images embedded" : ", images linked: keep it beside the study folder"})${exists(rf) ? "" : "\nNo reviews.json found: measured evidence only."}`);
     break;

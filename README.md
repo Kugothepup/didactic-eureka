@@ -14,7 +14,7 @@ the sites, and run the commands.
 | Commands | `skills/<command>/` | `/research-studio:new`, `question` (optional), `capture`, `review`, `tasks`, `synthesise`, `hub`, `round`, `promote`, `retro` |
 | Method | `skills/study-synthesis/` | the rules and steps every command follows |
 | Voice | `skills/review-writeup/` | pluses before deltas, calibrated not absolute |
-| Tools | `tools/` | the `studio` CLI: capture, record, structure, first clicks, annotations, summary, compare, **graph** (link structure), **report** (HTML) |
+| Tools | `tools/` | the `studio` CLI: capture, record, structure, first clicks, annotations, summary, compare, **graph** (link structure), **themes** (findings across sites), **report** (HTML) |
 | Presets | `presets/` | journeys for `portfolio`, `sign-up`, `service-enquiry`, `checkout`, `chatbot-first-moments`, `impact-forecast` |
 | Templates | `templates/` | Notion IDs to fill in, and gotchas |
 | Docs | `docs/` | the config format, the method in brief, and the retro log |
@@ -77,6 +77,13 @@ how many clicks from the start page, the goal page's distance by page links, the
 clusters, dead ends, and pages you can only reach through the menu. It separates the global menu and
 footer from content links, because on a mega-menu site everything is one click from everything. The
 report draws it. These are measurements of the pages the crawl reached, not the whole site.
+
+## Themes across sites
+
+`studio themes` groups the pluses and deltas you wrote for each site (`reviews.json`) into themes and
+flags the ones worth borrowing: a plus on one site and a delta on another about the same thing. It
+matches by wording, not meaning (no ML model to install), so treat it as a first grouping to read and
+correct. The report shows it.
 
 ## Rules the tools keep
 

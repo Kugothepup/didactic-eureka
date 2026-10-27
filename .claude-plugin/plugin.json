@@ -1,6 +1,6 @@
 {
   "name": "research-studio",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Evidence-led UX reviews for any project: capture your site and competitors along one journey (stills, videos, structure, accessibility), predict and draw first clicks, review in pluses and deltas, synthesise in Notion, and re-run in rounds to show what changed.",
   "author": { "name": "Steeve Royce" },
   "repository": "https://github.com/Kugothepup/didactic-eureka",

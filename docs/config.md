@@ -110,6 +110,16 @@ through the menu, dead ends, most-linked-to pages (PageRank), bridge pages (betw
 (Louvain). It describes the capped crawl, not the whole site. Crawls made before 0.4.0 have no link
 data: re-run `studio structure`. `studio report` shows the numbers and a diagram when graph.json exists.
 
+## Themes across sites
+
+`studio themes <study.json> [--min-sim 0.2]` reads the per-site pluses and deltas in `reviews.json`
+and writes `themes.json`. Findings are nodes; two are joined when their wording overlaps (TF-IDF
+cosine, standard library, no model to install); Louvain communities in NetworkX become themes.
+Each theme lists its sites and findings, and is marked **Worth borrowing** when one site has a plus
+and another a delta on the same thing. Findings that join nothing are listed as one-offs. The
+synthesis is left out, since it is derived from the sites. This groups by wording, not meaning, so it
+is a first pass to read and correct; lower `--min-sim` to group more loosely. `studio report` shows it.
+
 ## reviews.json and the HTML report
 
 `studio report <study.json> [--round r] [--embed] [--out file.html] [--reviews file.json]` builds one

@@ -11,7 +11,7 @@ then follow the method's **Check readiness** and **Synthesise** modes exactly. D
 beliefs) are fine: say so under Beliefs checked. Counts come from rows created or fetched in this
 session and keyword searches of each table, stated in Evidence used.
 
-**Local mode (no Notion):** write the Draft synthesis into `reviews.json` under `synthesis`, then run
-`studio report <study>`; there is no hub to refresh.
+**Local mode (no Notion):** run `studio themes <study>` and read the themes, write the Draft synthesis
+into `reviews.json` under `synthesis`, then run `studio report <study>`; there is no hub to refresh.
 
 Afterwards refresh the Project hub (`research-studio:hub`) with the synthesis in brief.
