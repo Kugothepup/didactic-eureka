@@ -14,6 +14,7 @@
 //   studio structure <study.json> [--round r] [--site s] [--max 15]
 //   studio firstclick <study.json> [--round r] [--site s]
 //   studio annotate  <study.json> <shots.json> [--round r] [--out dir]
+//   studio graph     <study.json> [--round r] [--site s]   link graph of each site's structure crawl
 //   studio summary   <study.json> [--round r]
 //   studio report    <study.json> [--round r] [--embed] [--out file.html] [--reviews file.json]
 // Any capture command takes --viewport 390x844 for a phone-width pass.
@@ -86,7 +87,8 @@ const needDeps = () => {
 };
 const run = (script, scriptArgs, extraEnv = {}) => {
   console.error(`\n▶ ${script} ${scriptArgs.map((a) => (/^https?:/.test(a) || !path.isAbsolute(a) ? a : path.relative(process.cwd(), a) || a)).join(" ")}`);
-  const r = spawnSync(script.endsWith(".py") ? "python3" : "node", [path.join(TOOLS, script), ...scriptArgs], { stdio: "inherit", cwd: TOOLS, env: { ...env(), ...extraEnv } });
+  const venvPy = path.join(TOOLS, ".venv", "bin", "python3");
+  const r = spawnSync(script.endsWith(".py") ? (exists(venvPy) ? venvPy : "python3") : "node", [path.join(TOOLS, script), ...scriptArgs], { stdio: "inherit", cwd: TOOLS, env: { ...env(), ...extraEnv } });
   return r.status;
 };
 const blockedIn = (dir) => (exists(path.join(dir, "blocked.json")) ? readJSON(path.join(dir, "blocked.json")) : null);
@@ -167,6 +169,13 @@ switch (cmd) {
     needDeps();
     const shots = path.resolve(args[1] || die("usage: studio annotate <study.json> <shots.json> [--out dir]"));
     run("annotate.mjs", [path.resolve(flags.out || path.dirname(shots)), shots]);
+    break;
+  }
+  case "graph": {
+    // Needs the venv from setup.sh (NetworkX). Reads each site's structure crawl; no browser.
+    const dirs = pick(() => true).map((s) => siteDir(s)).filter((d) => exists(path.join(d, "structure", "structure.json")));
+    if (!dirs.length) die("No structure crawls yet. Run `studio structure` first.");
+    if (run("graph.py", dirs) !== 0) die("graph.py failed. Is NetworkX installed? Run:\n  bash " + path.join(ROOT, "setup.sh"), 3);
     break;
   }
   case "summary": {

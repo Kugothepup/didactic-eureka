@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.4.0 · 2026-10-27
+
+- **Link graph:** `studio graph` analyses each site's structure crawl with NetworkX: depth from the
+  start page, clicks to the goal page by links, most-linked-to pages, clusters, dead ends and pages
+  reachable only through the menu. Menu and footer links (linked from 80%+ of pages) are separated
+  out, since they hide the real structure. Shown in the report as a table and a diagram per site.
+- `studio structure` now records each page's outgoing links (`linksTo`). Re-run it on older crawls.
+- `setup.sh` creates `tools/.venv` with NetworkX, NumPy, SciPy and Pillow.
+
 ## 0.3.0 · 2026-10-27
 
 - **HTML report:** `studio report` builds one page per round from the capture output: measured counts,

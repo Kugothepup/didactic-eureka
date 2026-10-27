@@ -89,6 +89,7 @@ the preset files in `presets/` for starting points.
 | `video/journey.mp4`, `journey-video.json` | `record` | the journey video and its chapters |
 | `tasks/<slug>/` | `record --tasks` | each "find X" video |
 | `structure/structure.json` | `structure` | the page-structure crawl |
+| `structure/graph.json` | `graph` | the link graph: depth, hubs, clusters, menu-only pages, dead ends, goal distance, layout |
 | `firstclick/` | `firstclick` | per-stage screens and the composed image |
 | `<round>/summary.json` | `summary` | the counts for the Notion rows |
 | `compare-<a>-<b>.md` | `compare` | measured changes between rounds |
@@ -96,6 +97,18 @@ the preset files in `presets/` for starting points.
 
 Uploaded media can be deleted locally once it's attached in Notion; keep the JSON so everything can
 be rebuilt.
+
+## The link graph
+
+`studio structure` records each page's same-host links (`linksTo`); `studio graph <study.json>` reads
+them with NetworkX and writes `structure/graph.json` per site. Pages linked from at least 80% of the
+crawled pages are treated as **menu links** (navigation, footer): they make every page one click from
+every other, so depth, hubs and clusters are also measured on the graph *without* them, which is what
+a visitor has to navigate beyond the menu. Measured: pages found and crawled, links, deepest page
+(with and without menu links), clicks to the journey's goal page by page links, pages reachable only
+through the menu, dead ends, most-linked-to pages (PageRank), bridge pages (betweenness) and clusters
+(Louvain). It describes the capped crawl, not the whole site. Crawls made before 0.4.0 have no link
+data: re-run `studio structure`. `studio report` shows the numbers and a diagram when graph.json exists.
 
 ## reviews.json and the HTML report
 

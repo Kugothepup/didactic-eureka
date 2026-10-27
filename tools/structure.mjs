@@ -46,8 +46,10 @@ while (queue.length && pages.length < MAX) {
       og: { title: meta("og:title"), description: meta("og:description"), image: meta("og:image") }, description: meta("description"), canonical: document.querySelector("link[rel=canonical]")?.href || null,
       links: [...document.querySelectorAll("a[href]")].map((a) => a.href) };
   });
-  pages.push({ url, status, ...s, links: undefined });
-  for (const l of s.links) { try { const u = new URL(l); if (u.host !== host || !/^https?:/.test(u.protocol)) continue; const k = u.origin + u.pathname; if (!seen.has(k) && !/\.(png|jpe?g|svg|webp|pdf|xml|ico)$/i.test(k)) { seen.add(k); queue.push(k); } } catch {} }
+  // Same-host pages this one links to, in the crawl's own URL form: the edges for `studio graph`.
+  const internal = [...new Set(s.links.map((l) => { try { const u = new URL(l); if (u.host !== host || !/^https?:/.test(u.protocol)) return null; const k = u.origin + u.pathname; return /\.(png|jpe?g|svg|webp|pdf|xml|ico)$/i.test(k) ? null : k; } catch { return null; } }).filter(Boolean))];
+  pages.push({ url, status, ...s, links: undefined, linksTo: internal });
+  for (const k of internal) if (!seen.has(k)) { seen.add(k); queue.push(k); }
   console.error(`${status} ${url}`);
 }
 // Probe parent paths that the URL scheme implies (e.g. /projects/), since visitors may trim the address.

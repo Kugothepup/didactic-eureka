@@ -16,7 +16,8 @@ its rules, especially rule 8 (never sign in, submit or get past a bot check).
    departure from the Brief's journey for the row's Route notes. Show the routes to the user if any
    choice is a judgement call.
 2. **Capture:** `studio capture <study>`, `studio reference <study>` (inspiration), `studio record
-   <study>`, `studio structure <study>`. Check each video's frames and a few stills by eye before
+   <study>`, `studio structure <study>`, then `studio graph <study>` (link graph of each crawl: needs the NetworkX
+   venv from `setup.sh`). Check each video's frames and a few stills by eye before
    trusting them (a contact sheet with ffmpeg is quickest).
 3. **Blocked sites:** if a site wrote `blocked.json`, set its row's Capture to
    **Blocked: manual review**, its Stage n to Blocked from the blocked step on, and tell the user.

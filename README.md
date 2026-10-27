@@ -14,7 +14,7 @@ the sites, and run the commands.
 | Commands | `skills/<command>/` | `/research-studio:new`, `question` (optional), `capture`, `review`, `tasks`, `synthesise`, `hub`, `round`, `promote`, `retro` |
 | Method | `skills/study-synthesis/` | the rules and steps every command follows |
 | Voice | `skills/review-writeup/` | pluses before deltas, calibrated not absolute |
-| Tools | `tools/` | the `studio` CLI: capture, record, structure, first clicks, annotations, summary, compare, **report** (HTML) |
+| Tools | `tools/` | the `studio` CLI: capture, record, structure, first clicks, annotations, summary, compare, **graph** (link structure), **report** (HTML) |
 | Presets | `presets/` | journeys for `portfolio`, `sign-up`, `service-enquiry`, `checkout`, `chatbot-first-moments`, `impact-forecast` |
 | Templates | `templates/` | Notion IDs to fill in, and gotchas |
 | Docs | `docs/` | the config format, the method in brief, and the retro log |
@@ -69,6 +69,14 @@ node tools/studio.mjs report ~/Documents/studies/ST-1/study.json --embed   # →
 
 The report has the measured counts, the journey, every site's screens, video and predicted first
 clicks, a stage-by-stage matrix, and the reviews and synthesis in pluses and deltas.
+
+## Link structure (NetworkX)
+
+`studio structure` crawls each site; `studio graph` turns the crawl into a link graph and measures it:
+how many clicks from the start page, the goal page's distance by page links, the most-linked-to pages,
+clusters, dead ends, and pages you can only reach through the menu. It separates the global menu and
+footer from content links, because on a mega-menu site everything is one click from everything. The
+report draws it. These are measurements of the pages the crawl reached, not the whole site.
 
 ## Rules the tools keep
 
